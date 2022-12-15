@@ -1,24 +1,29 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import "./App.scss";
+import Title from "./components/Title";
+import SectionOne from "./components/SectionOne";
+import SectionZero from "./components/SectionZero";
+import SectionThree from "./components/SectionThree";
+import SectionTwo from "./components/SectionTwo";
+import { useEffect } from "react";
+import { loadObserver } from "./store/IntersectionObserver";
+import SectionFour from "./components/SectionFour";
+import SectionFive from "./components/SectionFive";
 
 function App() {
+  useEffect(() => {
+    loadObserver();
+  }, []);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="Wrapper">
+      <article className="App">
+        <Title />
+        <SectionZero />
+        <SectionOne />
+        <SectionTwo />
+        <SectionThree />
+        <SectionFour />
+        <SectionFive />
+      </article>
     </div>
   );
 }
