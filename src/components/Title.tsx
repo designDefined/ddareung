@@ -8,7 +8,8 @@ const Title = () => {
         </div>
       </div>
       <div className="sub">
-        2022-2 정보구조 <span className="white">이윤호 한예원 박준영</span>
+        2022-2 정보구조{" "}
+        <span className="white">이윤호 한예원 박준영 + 백창인</span>
       </div>
     </header>
   );
