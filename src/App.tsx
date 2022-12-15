@@ -12,6 +12,7 @@ import SectionFive from "./components/SectionFive";
 function App() {
   useEffect(() => {
     loadObserver();
+    window.scrollTo(0, 0);
   }, []);
   return (
     <div className="Wrapper">
