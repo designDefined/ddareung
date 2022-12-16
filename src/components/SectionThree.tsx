@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import { useIntersectionObserver } from "../store/IntersectionObserver";
 import classNames from "classnames";
-import np from "./../image/np.png";
+import np2 from "./../image/np2.png";
 import Image from "./Image";
 
 const SectionThree = () => {
@@ -26,7 +26,17 @@ const SectionThree = () => {
       </div>
 
       <div className="MiniHeading">딥러닝의 원리</div>
-
+      <p>
+        딥러닝이라는 단어는 구글 딥마인드의 알파고가 이세돌과 대국을 하던
+        2016년부터 널리 알려지기 시작했습니다. 그러나 딥러닝의 원리가 무엇이고,
+        머신러닝과는 무슨 차이가 있는 지 구분하기는 쉽지 않습니다. 기본적으로
+        딥러닝은 머신러닝의 일종입니다. 머신러닝이란 특정한 문제를 해결함에
+        있어서 프로그래머가 해결 방법을 명시적으로 작성하는 게 아니라, 데이터를
+        바탕으로 컴퓨터가 이를 직접 학습하여 해결을 위한 모델을 도출하게끔 하는
+        컴퓨터 과학의 한 분야입니다. 머신러닝 모델의 대표적인 예시 중 하나가
+        바로 신경망 모델인데, 이 신경망 중에서도, 은닉층이 2개 이상인 심층
+        신경망을 이용한 머신러닝을 딥러닝이라고 합니다.
+      </p>
       <div className="MiniHeading">LSTM</div>
 
       <div className="MiniHeading">Neural Prophet</div>
@@ -47,7 +57,7 @@ const SectionThree = () => {
         코드입니다.
       </p>
       <Image
-        src={np}
+        src={np2}
         alt={"NeuralProphet"}
         add={
           "NeuralProphet의 예시 코드. 다양한 하이퍼파라미터를 간단하게 조작할 수 있다."

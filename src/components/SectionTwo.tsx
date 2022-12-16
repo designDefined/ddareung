@@ -1,4 +1,3 @@
-import Quote from "./Quote";
 import { useEffect, useRef } from "react";
 import { useIntersectionObserver } from "../store/IntersectionObserver";
 import classNames from "classnames";
@@ -61,9 +60,18 @@ const SectionTwo = () => {
         거쳐야 더욱 정확한 효과를 볼 수 있습니다. 어떤 데이터는 몇 만 단위, 어떤
         데이터는 0.000... 단위로 표현되어 있으면, 실제 데이터의 경향성과 다르게
         모델에 반영될 수 있기 때문이죠. 따라서 균일한 척도 하에 적절한 방식으로
-        데이터의 값을 변환하는 스케일링이 필요합니다.
+        데이터의 값을 변환하는 스케일링이 필요합니다. 스케일링에는 다양한 방법이
+        있는데, 저희는 MinMax Scaler, Standard Scaler, Normalizer 등을 이용하여
+        스케일링을 시도해 보았습니다.
       </p>
-      <p>스케일링에는 다양한 방법이 있는데, 저희는 ~~~~</p>
+      <p>
+        스케일링은 <span className="green thick">scikit-learn</span>과 같은
+        라이브러리를 이용하여 직접 적용할 수도 있고, 때로는 딥러닝 라이브러리에
+        기본적으로 포함되어 있기도 합니다. 다만 직접 스케일링을 할 경우에는
+        결과값을 다시 원본 데이터의 스케일로 복원하는 Inverse Scaling 작업을
+        반드시 해주어야 합니다. LSTM으로 새 값을 예측하면서, Inverse Scaling을
+        하지 않아 MAE가 비정상적으로 잡히는 실수를 하기도 했었습니다.
+      </p>
     </section>
   );
 };

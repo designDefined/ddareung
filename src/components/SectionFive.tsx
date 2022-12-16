@@ -2,14 +2,60 @@ import Quote from "./Quote";
 import { useEffect, useRef } from "react";
 import { useIntersectionObserver } from "../store/IntersectionObserver";
 import classNames from "classnames";
-import analyze1 from "./../image/analyze_var_1.png";
-import analyze2 from "./../image/analyze_var_2.png";
-import analyze3 from "./../image/analyze_var_3.png";
-import analyze4 from "./../image/analyze_var_4.png";
-import mae1 from "./../image/mae1.png";
-import mae2 from "./../image/mae2.png";
+import data from "./../data/gw_real.json";
+import dataNp from "./../data/gw_np.json";
 
 import Image from "./Image";
+
+import {
+  ResponsiveContainer,
+  ComposedChart,
+  Line,
+  Scatter,
+  XAxis,
+  YAxis,
+  Tooltip,
+  Legend,
+} from "recharts";
+
+const allData = data.map((column, index) => ({
+  idx: index,
+  real: column.real * 1000,
+  np: dataNp[index].NeuralProphet * 1000,
+}));
+
+const Example = () => {
+  return (
+    <ResponsiveContainer width="120%" height="100%">
+      <ComposedChart
+        width={500}
+        height={300}
+        data={allData}
+        margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
+      >
+        <Tooltip />
+        <Line
+          type="monotone"
+          dataKey="np"
+          stroke="#8884d8"
+          dot={false}
+          strokeWidth={2}
+        />
+        <Line
+          type="monotone"
+          dataKey="real"
+          stroke="#82ca9d"
+          dot={false}
+          strokeWidth={2}
+        />
+        <XAxis dataKey={"idx"} />
+        <YAxis dataKey={"np"} />
+        <Tooltip cursor={{ strokeDasharray: "3 3" }} />
+        <Legend />
+      </ComposedChart>
+    </ResponsiveContainer>
+  );
+};
 
 const SectionFive = () => {
   const ref1 = useRef<HTMLDivElement>(null);
@@ -38,7 +84,17 @@ const SectionFive = () => {
         어때요, 괜찮게 예측하고 있는 것 같나요?
       </p>
       <div className="MiniHeading">2021년 광진구 따릉이 수요량 (일별)</div>
-
+      <div className="chartWrapper">
+        <Example />
+      </div>
+      <p>
+        녹색은 실제 따릉이 수요량, 파란색은 Neural Prophet으로 예측한 따릉이의
+        수요입니다. 전반적으로 추세는 따라가지만 날씨 등의 환경적 변수로 인해
+        나타나는 실제 데이터의 변동성을 재현하지는 못했습니다. 예측할 때 각
+        날짜의 호우 여부 등을 알 수 있으면 훨씬 잘 예측할 수 있겠지만, 결국
+        미래를 예측하는 것이 목표이기 때문에 그러한 데이터 없이도 근사값을 내는
+        것이 중요했습니다.
+      </p>
       <div className="MiniHeading">후기</div>
       <p>
         약 한 달. 딥러닝이라는 거대한 분야를 맛보기에는 짧다면 짧은
