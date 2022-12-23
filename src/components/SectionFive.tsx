@@ -1,17 +1,14 @@
-import Quote from "./Quote";
 import { useEffect, useRef } from "react";
 import { useIntersectionObserver } from "../store/IntersectionObserver";
 import classNames from "classnames";
 import data from "./../data/gw_real.json";
 import dataNp from "./../data/gw_np.json";
-
-import Image from "./Image";
+import dataLstm from "./../data/lstm.json";
 
 import {
   ResponsiveContainer,
   ComposedChart,
   Line,
-  Scatter,
   XAxis,
   YAxis,
   Tooltip,
@@ -22,9 +19,15 @@ const allData = data.map((column, index) => ({
   idx: index,
   real: column.real * 1000,
   np: dataNp[index].NeuralProphet * 1000,
+  lstm:
+    index < dataLstm.length
+      ? dataLstm[index].gw * 1000
+      : dataLstm[dataLstm.length - 1].gw * 1000,
 }));
 
 const Example = () => {
+  console.log(allData.length);
+  console.log(dataLstm.length);
   return (
     <ResponsiveContainer width="120%" height="100%">
       <ComposedChart
@@ -38,6 +41,13 @@ const Example = () => {
           type="monotone"
           dataKey="np"
           stroke="#8884d8"
+          dot={false}
+          strokeWidth={2}
+        />
+        <Line
+          type="monotone"
+          dataKey="lstm"
+          stroke="#F78104"
           dot={false}
           strokeWidth={2}
         />
