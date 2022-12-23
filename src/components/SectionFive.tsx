@@ -46,13 +46,6 @@ const Example = () => {
         />
         <Line
           type="monotone"
-          dataKey="lstm"
-          stroke="#F78104"
-          dot={false}
-          strokeWidth={2}
-        />
-        <Line
-          type="monotone"
           dataKey="real"
           stroke="#82ca9d"
           dot={false}
@@ -60,6 +53,34 @@ const Example = () => {
         />
         <XAxis dataKey={"idx"} />
         <YAxis dataKey={"np"} />
+        <Tooltip cursor={{ strokeDasharray: "3 3" }} />
+        <Legend />
+      </ComposedChart>
+    </ResponsiveContainer>
+  );
+};
+
+const Example2 = () => {
+  console.log(allData.length);
+  console.log(dataLstm.length);
+  return (
+    <ResponsiveContainer width="120%" height="100%">
+      <ComposedChart
+        width={500}
+        height={300}
+        data={allData}
+        margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
+      >
+        <Tooltip />
+        <Line
+          type="monotone"
+          dataKey="lstm"
+          stroke="#F78104"
+          dot={false}
+          strokeWidth={2}
+        />
+        <XAxis dataKey={"idx"} />
+        <YAxis dataKey={"lstm"} />
         <Tooltip cursor={{ strokeDasharray: "3 3" }} />
         <Legend />
       </ComposedChart>
@@ -88,10 +109,10 @@ const SectionFive = () => {
         5. <span className="green"> 예측 </span>결과
       </div>
       <p>
-        다음 그래프는 LSTM과 NeuralProphet으로 학습시킨 모델이 예측한 광진구의
-        2021년 따릉이 수요량과 실제 따릉이 수요량을 비교한 것입니다. 모델은
-        2018년 ~ 2020년의 수요량 데이터와 다른 변수등을 이용하여 학습되었습니다.
-        어때요, 괜찮게 예측하고 있는 것 같나요?
+        다음 그래프는 NeuralProphet으로 학습시킨 모델이 예측한 광진구의 2021년
+        따릉이 수요량과 실제 따릉이 수요량을 비교한 것입니다. 모델은 2018년 ~
+        2020년의 수요량 데이터와 다른 변수등을 이용하여 학습되었습니다. 어때요,
+        괜찮게 예측하고 있는 것 같나요?
       </p>
       <div className="MiniHeading">2021년 광진구 따릉이 수요량 (일별)</div>
       <div className="chartWrapper">
@@ -105,6 +126,21 @@ const SectionFive = () => {
         미래를 예측하는 것이 목표이기 때문에 그러한 데이터 없이도 근사값을 내는
         것이 중요했습니다.
       </p>
+      <p>
+        다만 2022년 데이터를 예측하는 것에는 문제가 많았습니다. 특히 기존 며칠
+        간의 데이터를 기반으로 미래를 예측하는 LSTM의 경우, 새로운 데이터 몇
+        개의 예측은 그럴듯하게 해내지만 2022년도 전체와 같이 긴 구간을 새롭게
+        예측시키면 부정확한 값을 내는 경우가 있었습니다. 그 경우 아래의
+        그래프처럼 일정 시점부터 값이 하나로 수렴하게 됩니다. 예측 모델 구현에
+        문제가 있거나 학습이 불충분하게 이루어진 것으로 판단되었지만, 정확히
+        해결하지는 못하여 앞으로 더 공부할 부분으로 남겨두고자 합니다.
+      </p>
+      <div className="MiniHeading">
+        2022년 광진구 따릉이 수요량 예측치 (LSTM)
+      </div>
+      <div className="chartWrapper">
+        <Example2 />
+      </div>
       <div className="MiniHeading">후기</div>
       <p>
         약 한 달. 딥러닝이라는 거대한 분야를 맛보기에는 짧다면 짧은
@@ -126,7 +162,6 @@ const SectionFive = () => {
         박기범 교수님! 지금 돌아보니 조금 황당할 만큼 기본적인 실수를 해놓고
         SOS를 요청했는데, 짚어주셔서 감사합니다!
       </p>
-      <p>예원:</p>
       <p>
         준영: 모두들 벅찬 학기였을텐데, 다들 앞서서 일을 분배해가고 공부한
         지식을 공유해준 덕에 프로젝트를 무사히 마무리할 수 있었습니다. 정말 고생
